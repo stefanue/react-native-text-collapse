@@ -3,159 +3,159 @@ import { Text, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
-  fullTextWrapper: {
-    opacity: 0,
-    position: 'absolute',
-    left: 0,
-    top: 0,
-  },
-  viewMoreText: {
-    color: 'blue',
-  },
-  transparent: {
-    opacity: 0,
-  },
+	fullTextWrapper: {
+		opacity: 0,
+		position: 'absolute',
+		left: 0,
+		top: 0,
+	},
+	viewMoreText: {
+		color: 'blue',
+	},
+	transparent: {
+		opacity: 0,
+	},
 });
 
 class ViewMoreText extends React.Component {
-  trimmedTextHeight = null;
-  fullTextHeight = null;
-  shouldShowMore = true;
+	trimmedTextHeight = null;
+	fullTextHeight = null;
+	shouldShowMore = true;
 
-  state = {
-    isFulltextShown: false,
-    numberOfLines: this.props.numberOfLines,
-  }
+	state = {
+		isFulltextShown: false,
+		numberOfLines: this.props.numberOfLines,
+	}
 
-  hideFullText = () => {
-    if (
-      this.state.isFulltextShown &&
-      this.trimmedTextHeight &&
-      this.fullTextHeight
-    ) {
-      this.shouldShowMore = this.trimmedTextHeight < this.fullTextHeight;
-      this.setState({
-        isFulltextShown: false,
-      });
-    }
-  }
+	hideFullText = () => {
+		if (
+			this.state.isFulltextShown &&
+			this.trimmedTextHeight &&
+			this.fullTextHeight
+		) {
+			this.shouldShowMore = this.trimmedTextHeight < this.fullTextHeight;
+			this.setState({
+				isFulltextShown: false,
+			});
+		}
+	}
 
-  onLayoutTrimmedText = (event) => {
-    const {
-      height,
-    } = event.nativeEvent.layout;
+	onLayoutTrimmedText = (event) => {
+		const {
+			height,
+		} = event.nativeEvent.layout;
 
-    this.trimmedTextHeight = height;
-    this.hideFullText();
-  }
+		this.trimmedTextHeight = height;
+		this.hideFullText();
+	}
 
-  onLayoutFullText = (event) => {
-    const {
-      height,
-    } = event.nativeEvent.layout;
+	onLayoutFullText = (event) => {
+		const {
+			height,
+		} = event.nativeEvent.layout;
 
-    this.fullTextHeight = height;
-    this.hideFullText();
-  }
+		this.fullTextHeight = height;
+		this.hideFullText();
+	}
 
-  onPressMore = () => {
-    this.setState({
-      numberOfLines: null,
-    }, () => {
-      this.props.afterExpand();
-    });
-  }
+	onPressMore = () => {
+		this.setState({
+			numberOfLines: null,
+		}, () => {
+			this.props.afterExpand();
+		});
+	}
 
-  onPressLess = () => {
-    this.setState({
-      numberOfLines: this.props.numberOfLines,
-    }, () => {
-      this.props.afterCollapse();
-    });
-  }
+	onPressLess = () => {
+		this.setState({
+			numberOfLines: this.props.numberOfLines,
+		}, () => {
+			this.props.afterCollapse();
+		});
+	}
 
-  getWrapperStyle = () => {
-    if (this.state.isFulltextShown) {
-      return styles.transparent;
-    }
-    return {};
-  }
+	getWrapperStyle = () => {
+		if (this.state.isFulltextShown) {
+			return styles.transparent;
+		}
+		return {};
+	}
 
-  renderViewMore = () => (
-    <Text
-      style={styles.viewMoreText}
-      onPress={this.onPressMore}
-    >
-      View More
-    </Text>
-  )
+	renderViewMore = () => (
+		<View
+			onPress={this.onPressMore}>
+			<Text
+				style={styles.viewMoreText}
+			>View More
+			</Text>
+		</View>
+	)
 
-  renderViewLess = () => (
-    <Text
-      style={styles.viewMoreText}
-      onPress={this.onPressLess}
-    >
-      View Less
-    </Text>
-  )
+	renderViewLess = () => (
+		<View onPress={this.onPressLess}>
+			<Text
+				style={styles.viewMoreText}
+			>View Less</Text>
+		</View>
+	)
 
-  renderFooter = () => {
-    const {
-      numberOfLines,
-    } = this.state;
+	renderFooter = () => {
+		const {
+			numberOfLines,
+		} = this.state;
 
-    if (this.shouldShowMore === true) {
-      if (numberOfLines > 0) {
-        return (this.props.renderViewMore || this.renderViewMore)(this.onPressMore);
-      }
-      return (this.props.renderViewLess || this.renderViewLess)(this.onPressLess);
-    }
-    return null;
-  }
+		if (this.shouldShowMore === true) {
+			if (numberOfLines > 0) {
+				return (this.props.renderViewMore || this.renderViewMore)(this.onPressMore);
+			}
+			return (this.props.renderViewLess || this.renderViewLess)(this.onPressLess);
+		}
+		return null;
+	}
 
-  renderFullText = () => {
-    if (this.state.isFulltextShown) {
-      return (
-        <View onLayout={this.onLayoutFullText} style={styles.fullTextWrapper}>
-          <Text style={this.props.textStyle}>{this.props.children}</Text>
-        </View>
-      );
-    }
-    return null;
-  }
+	renderFullText = () => {
+		if (this.state.isFulltextShown) {
+			return (
+				<View onLayout={this.onLayoutFullText} style={styles.fullTextWrapper}>
+					<Text style={this.props.textStyle}>{this.props.children}</Text>
+				</View>
+			);
+		}
+		return null;
+	}
 
-  render() {
-    return (
-      <View style={this.getWrapperStyle()}>
-        <View onLayout={this.onLayoutTrimmedText}>
-          <Text
-            style={this.props.textStyle}
-            numberOfLines={this.state.numberOfLines}
-          >
-            {this.props.children}
-          </Text>
-          {this.renderFooter()}
-        </View>
+	render() {
+		return (
+			<View style={this.getWrapperStyle()}>
+				<View onLayout={this.onLayoutTrimmedText}>
+					<Text
+						style={this.props.textStyle}
+						numberOfLines={this.state.numberOfLines}
+					>
+						{this.props.children}
+					</Text>
+					{this.renderFooter()}
+				</View>
 
-        {this.renderFullText()}
-      </View>
-    );
-  }
+				{this.renderFullText()}
+			</View>
+		);
+	}
 }
 
 ViewMoreText.propTypes = {
-  renderViewMore: PropTypes.func,
-  renderViewLess: PropTypes.func,
-  afterCollapse: PropTypes.func,
-  afterExpand: PropTypes.func,
-  numberOfLines: PropTypes.number.isRequired,
-  textStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+	renderViewMore: PropTypes.func,
+	renderViewLess: PropTypes.func,
+	afterCollapse: PropTypes.func,
+	afterExpand: PropTypes.func,
+	numberOfLines: PropTypes.number.isRequired,
+	textStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 ViewMoreText.defaultProps = {
-  afterCollapse: () => { },
-  afterExpand: () => { },
-  textStyle: {},
+	afterCollapse: () => { },
+	afterExpand: () => { },
+	textStyle: {},
 };
 
 export default ViewMoreText;
