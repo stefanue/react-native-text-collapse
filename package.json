@@ -1,0 +1,31 @@
+{
+    "name": "react-native-text-collapse",
+    "version": "1.0.0",
+    "description": "Expand/Collapse long text.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "homepage": "https://github.com/stefanue/react-native-text-collapse",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/stefanue/react-native-text-collapse"
+    },
+    "keywords": [
+        "react",
+        "native",
+        "view",
+        "more",
+        "text",
+        "react-native-text-collapse"
+    ],
+    "author": "stefanue",
+    "dependencies": {
+        "prop-types": "^15.5.7"
+    },
+    "peerDependencies": {
+        "react": "*",
+        "react-native": "*",
+        "prop-types": "^15.5.7"
+    }
+}
