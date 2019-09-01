@@ -82,21 +82,18 @@ class ViewMoreText extends React.Component {
 	}
 
 	renderViewMore = () => (
-		<View
-			onPress={this.onPressMore}>
-			<Text
-				style={styles.viewMoreText}
-			>View More
+		<Text
+			style={styles.viewMoreText}
+			onPress={this.onPressMore}
+		>View More
 			</Text>
-		</View>
 	)
 
 	renderViewLess = () => (
-		<View onPress={this.onPressLess}>
-			<Text
-				style={styles.viewMoreText}
-			>View Less</Text>
-		</View>
+		<Text
+			style={styles.viewMoreText}
+			onPress={this.onPressLess}
+		>View Less</Text>
 	)
 
 	renderFooter = () => {
