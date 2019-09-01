@@ -4,13 +4,13 @@ A super lightweight plugin to expand/collapse text in React-Native. Truncated te
 
 Working on IOS/Android
 
-![ios](https://raw.githubusercontent.com/nlt2390/react-native-view-more-text/master/ios.gif)
-![android](https://raw.githubusercontent.com/nlt2390/react-native-view-more-text/master/android.gif)
+![ios](https://raw.githubusercontent.com/stefanue/react-native-text-collapse/master/ios.gif)
+![android](https://raw.githubusercontent.com/stefanue/react-native-text-collapse/master/android.gif)
 
 ### Installation
 
 ```
-npm install --save react-native-view-more-text 
+npm install --save react-native-text-collapse 
 
 ```
 
@@ -22,23 +22,21 @@ npm install --save react-native-view-more-text
 - **afterCollapse**(func): Callback after collapsing
 - **afterExpand**(func): Callback after expanding
 
-- **textStyle**([object, array]): Styles is passed to `Text` inside `ViewMoreText`
-(Refer to this [PR#8](https://github.com/nlt2390/react-native-view-more-text/pull/8))
 
 ```javascript
-  import ViewMoreText from 'react-native-view-more-text';
+  import ViewMoreText from 'react-native-text-collapse';
   
   let Example = React.createClass({
     renderViewMore(onPress){
       return(
         <Text onPress={onPress}>View more</Text>
       )
-    },
+    };
     renderViewLess(onPress){
       return(
         <Text onPress={onPress}>View less</Text>
       )
-    },
+    };
     render(){
       return(
         <ViewMoreText
@@ -56,11 +54,3 @@ npm install --save react-native-view-more-text
   })
 
 ```
-
-#### Donation
-<img src="https://www.cardanohub.org/wp-content/uploads/2017/07/cardano-symbol-150x150.png" width="70"/>
-Help to make cryptocurrency world bigger :))
-
-My <a href="https://www.cardanohub.org/en/home/" target="_blank">ADA</a> wallet: 
-
-DdzFFzCqrht7vQmuSYrjn6PKDxW3on4cFznU4Jjjycp1bqVTvXngM8wN7sop1Haq7msc5NanULU8TyAG9UuLLZMynfroiHKr2aiiTaMM
